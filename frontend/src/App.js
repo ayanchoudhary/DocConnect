@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "antd/dist/antd.css";
+import { Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Home from "pages/home";
+import Chat from "pages/chat";
 
-function App() {
+const history = createBrowserHistory();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/chat" render={(props) => <Chat {...props} />} />
+        <Route path="*" component={Home} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
