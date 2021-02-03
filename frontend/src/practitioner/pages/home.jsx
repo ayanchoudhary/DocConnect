@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "components/header/header";
-import Sidebar from "components/sidebar/sidebar";
+import Header from "practitioner/components/header/header";
+import Sidebar from "practitioner/components/sidebar/sidebar";
 
 const Home = () => {
   return (
