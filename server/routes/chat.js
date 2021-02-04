@@ -1,12 +1,11 @@
-const socketio = require('socket.io')
+const socketio = require("socket.io");
 
 const io = socketio(server, {
-    cors: {
-        origin: "*",
-    }
+  cors: {
+    origin: "*",
+  },
 });
 
-
-io.on('connection', (socket) => {
-    console.log('new client')
-})
+io.on("connection", (socket) => {
+  console.log("new client");
+});
