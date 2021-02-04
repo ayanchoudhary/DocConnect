@@ -3,8 +3,7 @@ import "antd/dist/antd.css";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Home from "pages/home";
-import Chat from "pages/chat";
-
+import Chat from "pages/chat/chat";
 const history = createBrowserHistory();
 
 const App = () => {
