@@ -35,7 +35,9 @@ const Sidebar = ({ selected }) => {
         <Menu.Item key="4">Previous History</Menu.Item>
       </SubMenu>
       <SubMenu key="sub2" icon={<SettingOutlined />} title="Medical Records">
-        <Menu.Item key="7">Upload Prescriptions</Menu.Item>
+        <Menu.Item key="7">
+          <Link to="/activity/create/onetime">Upload Prescriptions</Link>
+        </Menu.Item>
         <Menu.Item key="8">Health Calendar</Menu.Item>
       </SubMenu>
       <Menu.Item key="chat" icon={<LinkOutlined />}>

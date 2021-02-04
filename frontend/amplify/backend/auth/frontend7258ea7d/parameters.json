@@ -1,0 +1,102 @@
+{
+    "identityPoolName": "frontend7258ea7d_identitypool_7258ea7d",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "fronte7258ea7d",
+    "userPoolName": "frontend7258ea7d_userpool_7258ea7d",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": true,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+        "Requires Lowercase",
+        "Requires Numbers"
+    ],
+    "requiredAttributes": [
+        "email"
+    ],
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "address",
+        "birthdate",
+        "family_name",
+        "middle_name",
+        "gender",
+        "locale",
+        "given_name",
+        "name",
+        "nickname",
+        "phone_number",
+        "preferred_username",
+        "picture",
+        "profile",
+        "updated_at",
+        "website",
+        "zoneinfo",
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "address",
+        "birthdate",
+        "email",
+        "family_name",
+        "middle_name",
+        "gender",
+        "locale",
+        "given_name",
+        "name",
+        "nickname",
+        "phone_number",
+        "preferred_username",
+        "picture",
+        "profile",
+        "updated_at",
+        "website",
+        "zoneinfo",
+        "email_verified",
+        "phone_number_verified"
+    ],
+    "userpoolClientLambdaRole": "fronte7258ea7d_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": true,
+    "sharedId": "7258ea7d",
+    "resourceName": "frontend7258ea7d",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "manual",
+    "usernameAttributes": [
+        "email"
+    ],
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
+    "dependsOn": [],
+    "userPoolGroups": false,
+    "adminQueries": true,
+    "triggers": "{}",
+    "hostedUI": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "thirdPartyAuth": false
+}
