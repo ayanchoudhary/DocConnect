@@ -1,17 +1,17 @@
 import React from "react";
 import Header from "components/header/header";
 import Sidebar from "components/sidebar/sidebar";
-import socketClient from "socket.io-client";
+// import socketClient from "socket.io-client";
 import { Link } from "react-router-dom";
 import "./chat.css";
 
-const SERVER = "http://127.0.0.1:4000";
+// const SERVER = "http://127.0.0.1:4000";
 
 const Chat = () => {
-  const socket = socketClient(SERVER);
-  socket.on("connection", () => {
-    console.log("I'm connected with the back-end");
-  });
+  // const socket = socketClient(SERVER);
+  // socket.on("connection", () => {
+  //   console.log("I'm connected with the back-end");
+  // });
   const [roomName, setRoomName] = React.useState("");
 
   const handleRoomNameChange = (event) => {
@@ -29,7 +29,7 @@ const Chat = () => {
           onChange={handleRoomNameChange}
           className="text-input-field"
         />{" "}
-        <Link to={`/${roomName}`} className="enter-room-button">
+        <Link to={`/chat/${roomName}`} className="enter-room-button">
           Join room
         </Link>
       </div>
