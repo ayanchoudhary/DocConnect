@@ -16,6 +16,8 @@ import RecurringActivity from "practitioner/pages/recurringActivity";
 import { SET_USER } from "constants/action-types";
 
 Amplify.configure(awsconfig);
+import RegisterFormClient from "client/components/registerForm/registerForm";
+import RegisterFormPractitioner from "practitioner/components/registerForm/registerForm";
 
 const history = createBrowserHistory();
 
@@ -44,6 +46,11 @@ const App = () => {
     <Router history={history}>
       {user.client ? (
         <Switch>
+          <Route
+            exact
+            path="/newPractitioner"
+            component={RegisterFormPractitioner}
+          />
           <Route exact path="/" render={(props) => <ClientHome {...props} />} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
