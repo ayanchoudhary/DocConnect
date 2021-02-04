@@ -11,15 +11,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Switch directory
+      - name: Switch directory and run build test
         run: |
-          cd frontend
-      - name: Install dependencies
-        run: |
-          npm install
-      - name: Run build
-        run: |
-          npm build
+          cd frontend && npm install && npm run build
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -28,15 +23,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Switch directory
+      - name: Switch directory and run lint test
         run: |
-          cd frontend
-      - name: Install dependencies
-        run: |
-          npm install
-      - name: Run lint test
-        run: |
-          npm run lint
+          cd frontend && npm install && npm run lint
+
   format:
     runs-on: ubuntu-latest
     steps:
@@ -45,12 +35,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Switch directory
+      - name: Switch directory and run format test
         run: |
-          cd frontend
-      - name: Install dependencies
-        run: |
-          npm install
-      - name: Run format test
-        run: |
-          npm run format:test
+          cd frontend && npm install && npm run format:test
