@@ -11,7 +11,9 @@ import {
   Col,
   Row,
   Modal,
+  notification,
 } from "antd";
+import _ from "lodash";
 import "styles/main.scss";
 
 const formItemLayout = {
@@ -60,6 +62,20 @@ const OneTime = () => {
     setFields(values);
     console.log("Received values of form: ", values);
     setPreview(true);
+  };
+
+  const onSubmit = () => {
+    if (_.isEmpty(fields)) {
+      notification.open({
+        message: "Preview not viewed",
+        description: "Please view the preview and submit again!",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
+    } else {
+      //Send to API
+    }
   };
 
   return (
@@ -195,7 +211,11 @@ const OneTime = () => {
             }}
           >
             <Button htmlType="submit">View Preview</Button>
-            <Button style={{ marginLeft: 32 }} type="primary" htmlType="submit">
+            <Button
+              style={{ marginLeft: 32 }}
+              type="primary"
+              onClick={onSubmit}
+            >
               Submit
             </Button>
           </Form.Item>
@@ -206,12 +226,11 @@ const OneTime = () => {
         visible={preview}
         onOk={() => setPreview(false)}
         onCancel={() => setPreview(false)}
-        className="site-layout-background"
+        align="center"
         style={{
           padding: 24,
           paddingBottom: 32,
           margin: 24,
-          background: "#fff",
         }}
         footer={[
           <Button key="ok" type="primary" onClick={() => setPreview(false)}>
@@ -226,8 +245,20 @@ const OneTime = () => {
           <Skeleton loading={false} avatar active>
             <Meta title={fields.title} description={fields.description} />
           </Skeleton>
-          <p>{fields.days}</p>
-          <p>{fields.time}</p>
+          <p style={{ marginTop: 24 }}>
+            Applicable Days:{" "}
+            {fields.days
+              ? fields.days.map((day, index) => (
+                  <span style={{ fontWeight: "lighter" }} key={index}>
+                    {index != fields.days.length - 1 ? `${day},` : `${day}`}
+                  </span>
+                ))
+              : null}
+          </p>
+          <p>
+            Time of occurrence:{" "}
+            <span style={{ fontWeight: "lighter" }}>{fields.time}</span>
+          </p>
         </Card>
       </Modal>
     </Layout>

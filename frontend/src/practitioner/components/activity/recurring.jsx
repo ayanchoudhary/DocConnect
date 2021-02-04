@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Layout,
   Form,
@@ -8,13 +8,9 @@ import {
   Button,
   Skeleton,
   Card,
-  Avatar,
+  Modal,
+  notification,
 } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 import "styles/main.scss";
 
 const { RangePicker } = DatePicker;
@@ -63,28 +59,37 @@ const { Meta } = Card;
 const { TextArea } = Input;
 
 const Recurring = () => {
+  const [fields, setFields] = useState({});
+  const [preview, setPreview] = useState(false);
+
   const onFinish = (fieldsValue) => {
     // Should format date value before submit.
     const rangeValue = fieldsValue["range-picker"];
-    const rangeTimeValue = fieldsValue["range-time-picker"];
     const values = {
       ...fieldsValue,
-      "date-picker": fieldsValue["date-picker"].format("YYYY-MM-DD"),
-      "date-time-picker": fieldsValue["date-time-picker"].format(
-        "YYYY-MM-DD HH:mm:ss"
-      ),
-      "month-picker": fieldsValue["month-picker"].format("YYYY-MM"),
-      "range-picker": [
-        rangeValue[0].format("YYYY-MM-DD"),
-        rangeValue[1].format("YYYY-MM-DD"),
+      dates: [
+        rangeValue[0].format("DD-MM-YYYY"),
+        rangeValue[1].format("DD-MM-YYYY"),
       ],
-      "range-time-picker": [
-        rangeTimeValue[0].format("YYYY-MM-DD HH:mm:ss"),
-        rangeTimeValue[1].format("YYYY-MM-DD HH:mm:ss"),
-      ],
-      "time-picker": fieldsValue["time-picker"].format("HH:mm:ss"),
+      time: fieldsValue["time-picker"].format("HH:mm:ss"),
     };
+    setFields(values);
     console.log("Received values of form: ", values);
+    setPreview(true);
+  };
+
+  const onSubmit = () => {
+    if (_.isEmpty(fields)) {
+      notification.open({
+        message: "Preview not viewed",
+        description: "Please view the preview and submit again!",
+        onClick: () => {
+          console.log("Notification Clicked!");
+        },
+      });
+    } else {
+      //Send to API
+    }
   };
 
   return (
@@ -119,37 +124,11 @@ const Recurring = () => {
           >
             <Input style={{ width: 256 }} />
           </Form.Item>
-          <Form.Item
-            label="Title"
-            name="title"
-            rules={[
-              { required: true, message: "Please input appropriate title!" },
-            ]}
-          >
+          <Form.Item label="Description" name="description">
             <TextArea rows={4} style={{ width: 320 }} />
-          </Form.Item>
-          <Form.Item name="date-picker" label="DatePicker" {...config}>
-            <DatePicker />
-          </Form.Item>
-          <Form.Item
-            name="date-time-picker"
-            label="DatePicker[showTime]"
-            {...config}
-          >
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-          </Form.Item>
-          <Form.Item name="month-picker" label="MonthPicker" {...config}>
-            <DatePicker picker="month" />
           </Form.Item>
           <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
             <RangePicker />
-          </Form.Item>
-          <Form.Item
-            name="range-time-picker"
-            label="RangePicker[showTime]"
-            {...rangeConfig}
-          >
-            <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
           </Form.Item>
           <Form.Item name="time-picker" label="TimePicker" {...config}>
             <TimePicker />
@@ -166,31 +145,57 @@ const Recurring = () => {
               },
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button htmlType="submit">View Preview</Button>
+            <Button
+              style={{ marginLeft: 32 }}
+              type="primary"
+              onClick={onSubmit}
+            >
               Submit
             </Button>
           </Form.Item>
         </Form>
       </Content>
-      <Content
-        className="site-layout-background section"
+      <Modal
+        title="Preview"
+        visible={preview}
+        onOk={() => setPreview(false)}
+        onCancel={() => setPreview(false)}
+        align="center"
         style={{
-          padding: "0 24px 24px",
           padding: 24,
+          paddingBottom: 32,
           margin: 24,
-          background: "#fff",
         }}
+        footer={[
+          <Button key="ok" type="primary" onClick={() => setPreview(false)}>
+            Ok
+          </Button>,
+        ]}
       >
-        Preview
         <Card
           style={{ marginTop: "16px" }}
-          actions={[<p key="accept">Accept</p>, <p key="reject">Reject</p>]}
+          actions={[<p key="accept">Accept</p>, <p key="cancel">Cancel</p>]}
         >
           <Skeleton loading={false} avatar active>
-            <Meta title="Card title" description="This is the description" />
+            <Meta title={fields.title} description={fields.description} />
           </Skeleton>
+          <p style={{ marginTop: 24 }}>
+            Applicable Period:{" "}
+            {fields.dates ? (
+              <span>
+                <span style={{ fontWeight: "lighter" }}>
+                  {fields.dates[0]} thru {fields.dates[1]}
+                </span>
+              </span>
+            ) : null}
+          </p>
+          <p>
+            Time of occurrence:{" "}
+            <span style={{ fontWeight: "lighter" }}>{fields.time}</span>
+          </p>
         </Card>
-      </Content>
+      </Modal>
     </Layout>
   );
 };
