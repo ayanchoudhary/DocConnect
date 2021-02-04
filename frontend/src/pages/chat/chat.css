@@ -1,31 +1,31 @@
 .home-container {
-    position: fixed;
-    left: 40%;
-    /* right: 50%; */
-    top: 20%;
-    transform: translate(0, -50%);
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  left: 40%;
+  /* right: 50%; */
+  top: 20%;
+  transform: translate(0, -50%);
+  display: flex;
+  flex-direction: column;
 }
 
 .text-input-field {
-    padding: 10px 10px;
-    border-radius: 5px;
-    font-size: 12px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-size: 12px;
 }
 
 .text-input-field:focus {
-    outline: none;
+  outline: none;
 }
 
 .enter-room-button {
-    margin-top: 10px;
-    padding: 10px 10px;
-    font-size: 15px;
-    background: #31a24c;
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 7px;
+  margin-top: 10px;
+  padding: 10px 10px;
+  font-size: 15px;
+  background: #31a24c;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 7px;
 }
