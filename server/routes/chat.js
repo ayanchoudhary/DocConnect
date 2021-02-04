@@ -9,5 +9,4 @@ const io = socketio(server, {
 
 io.on('connection', (socket) => {
     console.log('new client')
-    socket.emit('connection', null)
 })

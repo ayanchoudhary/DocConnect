@@ -10,16 +10,27 @@ const io = socketio(server, {
     }
 });
 
-const STATIC_CHANNELS = ['global_notifications', 'global_chat']
-
 const PORT = process.env.PORT || 4000;
+
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+
+io.on('connection', (socket) => {
+    console.log('new client')
+
+    const { roomId } = socket.handshake.query;
+    socket.join(roomId);
+    socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+        console.log("message incoming")
+        io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    });
+
+    socket.on("disconnect", () => {
+        socket.leave(roomId);
+    })
+})
 
 server.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
 })
 
-io.on('connection', (socket) => {
-    console.log('new client')
-    socket.emit('connection', null)
-})
 module.exports = app;
