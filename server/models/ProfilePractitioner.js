@@ -35,6 +35,6 @@ const ProfilePractitionerSchema = new mongoose.Schema({
 });
 
 module.exports = ProfilePractitioner = mongoose.model(
-  "profilepractitioner",
+  "profile practitioner",
   ProfilePractitionerSchema
 );

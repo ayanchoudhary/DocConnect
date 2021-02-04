@@ -14,7 +14,8 @@ const io = socketio(server, {
 connectDB();
 app.use(express.json({ extender: false }));
 
-app.use("/api/profile", require("../routes/api/profile"));
+app.use("/api/profile", require("../routes/api/practionerProfile"));
+app.use("/api/profile", require("../routes/api/clientProfile"));
 
 const PORT = process.env.PORT || 4000;
 
