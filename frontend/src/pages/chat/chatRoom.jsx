@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import Header from "components/header/header";
-import Sidebar from "components/sidebar/sidebar";
+import Sidebar from "client/components/sidebar/sidebar";
 
 import "./chatRoom.css";
 import useChat from "./useChat";

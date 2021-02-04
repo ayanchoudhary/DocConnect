@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import Sidebar from "practitioner/components/sidebar/sidebar";
-import Header from "practitioner/components/header/header";
+import Header from "components/header/header";
 import OneTime from "practitioner/components/activity/oneTime";
 
 const OneTimeActivity = () => {
