@@ -5,13 +5,7 @@ import Sidebar from "client/components/sidebar/sidebar";
 import { Link } from "react-router-dom";
 import "./chat.css";
 
-// const SERVER = "http://127.0.0.1:4000";
-
 const Chat = () => {
-  // const socket = socketClient(SERVER);
-  // socket.on("connection", () => {
-  //   console.log("I'm connected with the back-end");
-  // });
   const [roomName, setRoomName] = React.useState("");
 
   const handleRoomNameChange = (event) => {
@@ -24,7 +18,7 @@ const Chat = () => {
       <div className="home-container">
         <input
           type="text"
-          placeholder="Room"
+          placeholder="Practitioner ID"
           value={roomName}
           onChange={handleRoomNameChange}
           className="text-input-field"
