@@ -1,20 +1,13 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 
 const { Header } = Layout;
 
 const HeaderMain = () => {
   return (
-    <Layout>
-      <Header className="header">
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal">
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
-      </Header>
-    </Layout>
+    <Header className="header" style={{ height: "64px" }}>
+      <div className="logo" />
+    </Header>
   );
 };
 

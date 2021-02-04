@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "components/header/header";
-import Sidebar from "components/sidebar/sidebar";
+import Sidebar from "client/components/sidebar/sidebar";
 // import socketClient from "socket.io-client";
 import { Link } from "react-router-dom";
 import "./chat.css";
