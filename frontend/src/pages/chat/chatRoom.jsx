@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "components/header/header";
 import Sidebar from "client/components/sidebar/sidebar";
 
 import "./chatRoom.css";
 import useChat from "./useChat";
+import sendIcon from "./send.svg";
 
 const ChatRoom = (props) => {
+  const messagesEnd = useRef(null);
   const { roomId } = props.match.params; // Gets roomId from URL
   const { messages, sendMessage } = useChat(roomId); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
@@ -19,6 +21,20 @@ const ChatRoom = (props) => {
     sendMessage(newMessage);
     setNewMessage("");
   };
+
+  const handleKeypress = (event) => {
+    if (event.keyCode === 13) {
+      handleSendMessage();
+    }
+  };
+
+  const scrollToBottom = () => {
+    messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div>
@@ -39,16 +55,20 @@ const ChatRoom = (props) => {
               </li>
             ))}
           </ol>
+          <div ref={messagesEnd}></div>
         </div>
-        <textarea
-          value={newMessage}
-          onChange={handleNewMessageChange}
-          placeholder="Write message..."
-          className="new-message-input-field"
-        />
-        <button onClick={handleSendMessage} className="send-message-button">
-          Send
-        </button>
+        <div className="footer">
+          <input
+            value={newMessage}
+            onChange={handleNewMessageChange}
+            placeholder="Write message..."
+            className="new-message-input-field"
+            onKeyPress={() => handleKeypress(event)}
+          />
+          <button onClick={handleSendMessage} className="send-message-button">
+            <img src={sendIcon} />
+          </button>
+        </div>
       </div>
     </div>
   );
