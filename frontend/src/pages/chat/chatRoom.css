@@ -1,87 +1,89 @@
 .chat-room-container {
-    position: fixed;
-    left: 240px;
-    right: 0;
-    top: 0;
-    bottom: 500px;
-    display: flex;
-    flex-direction: column;
-    margin: 16px;
+  position: fixed;
+  left: 240px;
+  right: 0;
+  top: 0;
+  bottom: 500px;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
 }
 
 .room-name {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .messages-container {
-    flex: 1;
-    min-height: 100px;
-    overflow: auto;
-    border: 1px solid black;
-    border-radius: 7px 7px 0 0;
+  flex: 1;
+  min-height: 100px;
+  overflow: auto;
+  border: 1px solid black;
+  border-radius: 7px 7px 0 0;
 }
 
 .messages-list {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .new-message-input-field {
-    height: 200px;
-    max-height: 50%;
-    font-size: 20px;
-    padding: 8px 12px;
-    resize: none;
+  height: 200px;
+  max-height: 50%;
+  font-size: 20px;
+  padding: 8px 12px;
+  resize: none;
 }
 
 .message-item {
-    width: 55%;
-    margin: 8px;
-    padding: 12px 8px;
-    word-break: break-word;
-    border-radius: 4px;
+  width: 55%;
+  margin: 8px;
+  padding: 12px 8px;
+  word-break: break-word;
+  border-radius: 4px;
 }
 
 .my-message {
-    border: 1 px solid #dddddd;
-    border-radius: 20px;
-    font-size: 12px;
-    padding: 7px 15px;
-    background-color: #00cec9;
-    margin-left: auto;
+  border: 1 px solid #dddddd;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 7px 15px;
+  background-color: #00cec9;
+  margin-left: auto;
 }
 
 .received-message {
-    border: 1 px solid #dddddd;
-    border-radius: 20px;
-    font-size: 12px;
-    padding: 7px 15px;
-    background-color: #dfe6e9;
-    margin-right: auto;
+  border: 1 px solid #dddddd;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 7px 15px;
+  background-color: #dfe6e9;
+  margin-right: auto;
 }
 
 .send-message-button {
-    font-size: 12px;
-    font-weight: 600;
-    color: white;
-    background: #31a24c;
-    padding-top: 5px;
-    border: none;
-    height: 30px;
-    display: flex;
-    border-top: 1px solid #ddd;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: #31a24c;
+  padding-top: 5px;
+  border: none;
+  height: 30px;
+  display: flex;
+  border-top: 1px solid #ddd;
 }
 
-.messages-container, .new-message-input-field, .send-message-button {
-    border-color: #9a9a9a;
+.messages-container,
+.new-message-input-field,
+.send-message-button {
+  border-color: #9a9a9a;
 }
 
 .new-message-input-field {
-    height: 62px;
-    width: 500px;
-    margin-right: 10px;
+  height: 62px;
+  width: 500px;
+  margin-right: 10px;
 }
 
 .footer {
-    display: flex;
+  display: flex;
 }
