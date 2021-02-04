@@ -5,7 +5,7 @@ import Sidebar from "client/components/sidebar/sidebar";
 
 import "./chatRoom.css";
 import useChat from "./useChat";
-import sendIcon from "../../../public/send.svg";
+import sendIcon from "./send.svg";
 
 const ChatRoom = (props) => {
   const messagesEnd = useRef(null);
@@ -57,16 +57,18 @@ const ChatRoom = (props) => {
           </ol>
           <div ref={messagesEnd}></div>
         </div>
-        <textarea
-          value={newMessage}
-          onChange={handleNewMessageChange}
-          placeholder="Write message..."
-          className="new-message-input-field"
-          onKeyPress={() => handleKeypress(event)}
-        />
-        <button onClick={handleSendMessage} className="send-message-button">
-          <img src={sendIcon} />
-        </button>
+        <div className="footer">
+          <input
+            value={newMessage}
+            onChange={handleNewMessageChange}
+            placeholder="Write message..."
+            className="new-message-input-field"
+            onKeyPress={() => handleKeypress(event)}
+          />
+          <button onClick={handleSendMessage} className="send-message-button">
+            <img src={sendIcon} />
+          </button>
+        </div>
       </div>
     </div>
   );

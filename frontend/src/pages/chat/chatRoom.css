@@ -68,6 +68,8 @@
     padding-top: 5px;
     border: none;
     height: 30px;
+    display: flex;
+    border-top: 1px solid #ddd;
 }
 
 .messages-container, .new-message-input-field, .send-message-button {
@@ -75,5 +77,11 @@
 }
 
 .new-message-input-field {
-    height: 50px;
+    height: 62px;
+    width: 500px;
+    margin-right: 10px;
+}
+
+.footer {
+    display: flex;
 }
