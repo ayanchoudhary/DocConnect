@@ -4,14 +4,14 @@ import Sidebar from "client/components/sidebar/sidebar";
 import Header from "components/header/header";
 import Prescription from "client/components/medical/prescription";
 
-const UploadPrescription = () => {
+const OnGoingConsultation = () => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Header />
-      <Sidebar selected="prescription" open={["medical", "prescription"]} />
-      <Prescription />
+      <Sidebar selected="ongoing" open={["consultation", "ongoing"]} />
+      {/* <Prescription /> */}
     </Layout>
   );
 };
 
-export default UploadPrescription;
+export default OnGoingConsultation;

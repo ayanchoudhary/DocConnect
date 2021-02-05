@@ -102,12 +102,13 @@ const Recurring = () => {
       }}
     >
       <Content
-        className="site-layout-background section"
+        className="site-layout-background"
         style={{
-          padding: "0 24px 24px",
           padding: 24,
           margin: 24,
           background: "#fff",
+          height: "100%",
+          width: "100%",
         }}
       >
         <Form
