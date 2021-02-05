@@ -71,7 +71,7 @@ const Recurring = () => {
         rangeValue[0].format("DD-MM-YYYY"),
         rangeValue[1].format("DD-MM-YYYY"),
       ],
-      time: fieldsValue["time-picker"].format("HH:mm:ss"),
+      time: fieldsValue["time"].format("HH:mm:ss"),
     };
     setFields(values);
     console.log("Received values of form: ", values);
@@ -113,6 +113,7 @@ const Recurring = () => {
       >
         <Form
           name="time_related_controls"
+          style={{ marginTop: "5vh" }}
           {...formItemLayout}
           onFinish={onFinish}
         >
@@ -131,7 +132,7 @@ const Recurring = () => {
           <Form.Item name="range-picker" label="RangePicker" {...rangeConfig}>
             <RangePicker />
           </Form.Item>
-          <Form.Item name="time-picker" label="TimePicker" {...config}>
+          <Form.Item name="time" label="Assigned Time" {...config}>
             <TimePicker />
           </Form.Item>
           <Form.Item
