@@ -35,8 +35,8 @@ const Sidebar = ({ selected }) => {
         <Menu.Item key="4">Previous History</Menu.Item>
       </SubMenu>
       <SubMenu key="sub2" icon={<SettingOutlined />} title="Medical Records">
-        <Menu.Item key="7">
-          <Link to="/activity/create/onetime">Upload Prescriptions</Link>
+        <Menu.Item key="prescription">
+          <Link to="/prescription">Upload Prescriptions</Link>
         </Menu.Item>
         <Menu.Item key="8">Health Calendar</Menu.Item>
       </SubMenu>
@@ -44,7 +44,7 @@ const Sidebar = ({ selected }) => {
         <Link to="/chat">Chat with a Practitioner</Link>
       </Menu.Item>
       <Menu.Item key="chat" icon={<LinkOutlined />}>
-        <Link to="/chat">Consult with AI Practitioner</Link>
+        <Link to="/activity/create/onetime">Consult with AI Practitioner</Link>
       </Menu.Item>
     </Menu>
   );

@@ -13,6 +13,7 @@ import Chat from "pages/chat/chat";
 import ChatRoom from "pages/chat/chatRoom";
 import OneTimeActivity from "practitioner/pages/oneTimeActivity";
 import RecurringActivity from "practitioner/pages/recurringActivity";
+import Prescription from "client/pages/prescription";
 import { SET_USER } from "constants/action-types";
 
 Amplify.configure(awsconfig);
@@ -45,6 +46,7 @@ const App = () => {
       {user.client ? (
         <Switch>
           <Route exact path="/" render={(props) => <ClientHome {...props} />} />
+          <Route exact path="/prescription" component={Prescription} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
           <Route path="*" component={ClientHome} />
@@ -52,15 +54,10 @@ const App = () => {
       ) : (
         <Switch>
           <Route exact path="/" render={(props) => <PracHome {...props} />} />
+          <Route path="/activity/create/onetime" component={OneTimeActivity} />
           <Route
-            exact
-            path="/activity/create/onetime"
-            render={(props) => <OneTimeActivity {...props} />}
-          />
-          <Route
-            exact
             path="/activity/create/recurring"
-            render={(props) => <RecurringActivity {...props} />}
+            component={RecurringActivity}
           />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
