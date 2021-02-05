@@ -16,6 +16,7 @@ app.use(express.json({ extender: false }));
 
 app.use("/api/profile", require("../routes/api/practionerProfile"));
 app.use("/api/profile", require("../routes/api/clientProfile"));
+app.use("/api/activity", require("../routes/api/oneTimeActivity"));
 
 const PORT = process.env.PORT || 4000;
 
