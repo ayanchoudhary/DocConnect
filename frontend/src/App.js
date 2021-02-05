@@ -11,8 +11,19 @@ import ClientHome from "client/pages/home";
 import PracHome from "practitioner/pages/home";
 import Chat from "pages/chat/chat";
 import ChatRoom from "pages/chat/chatRoom";
+import Scheduler from "practitioner/pages/scheduler";
+import ViewActivity from "practitioner/pages/viewActivity";
 import OneTimeActivity from "practitioner/pages/oneTimeActivity";
 import RecurringActivity from "practitioner/pages/recurringActivity";
+import PracConsultation from "practitioner/pages/onGoingConsultation";
+import PreviousHistory from "practitioner/pages/previousHistory";
+import NewConsultation from "practitioner/pages/newConsultation";
+import FindPractitioner from "client/pages/findPractitioner";
+import RenewConsultation from "client/pages/renewConsultation";
+import OnGoingConsultation from "client/pages/onGoingConsultation";
+import PreviousConsultation from "client/pages/previousConsultation";
+import Prescription from "client/pages/prescription";
+import HealthCalendar from "client/pages/healthCalendar";
 import { SET_USER } from "constants/action-types";
 
 Amplify.configure(awsconfig);
@@ -52,6 +63,24 @@ const App = () => {
             component={RegisterFormPractitioner}
           />
           <Route exact path="/" render={(props) => <ClientHome {...props} />} />
+          <Route exact path="/appointment/find" component={FindPractitioner} />
+          <Route
+            exact
+            path="/appointment/renew"
+            component={RenewConsultation}
+          />
+          <Route
+            exact
+            path="/consultation/ongoing"
+            component={OnGoingConsultation}
+          />
+          <Route
+            exact
+            path="/consultation/previous"
+            component={PreviousConsultation}
+          />
+          <Route exact path="/medical/prescription" component={Prescription} />
+          <Route exact path="/medical/calendar" component={HealthCalendar} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
           <Route path="*" component={ClientHome} />
@@ -59,18 +88,31 @@ const App = () => {
       ) : (
         <Switch>
           <Route exact path="/" render={(props) => <PracHome {...props} />} />
+          <Route exact path="/scheduler" component={Scheduler} />
+          <Route exact path="/activity/view" component={ViewActivity} />
           <Route
             exact
             path="/activity/create/onetime"
-            render={(props) => <OneTimeActivity {...props} />}
+            component={OneTimeActivity}
           />
           <Route
             exact
             path="/activity/create/recurring"
-            render={(props) => <RecurringActivity {...props} />}
+            component={RecurringActivity}
           />
-          <Route exact path="/chat" render={(props) => <Chat {...props} />} />
-          <Route exact path="/chat/:roomId" component={ChatRoom} />
+          <Route
+            exact
+            path="/consultation/ongoing"
+            component={PracConsultation}
+          />
+          <Route
+            exact
+            path="/consultation/history"
+            component={PreviousHistory}
+          />
+          <Route exact path="/consultation/new" component={NewConsultation} />
+          {/* <Route exact path="/chat" render={(props) => <Chat {...props} />} />
+          <Route exact path="/chat/:roomId" component={ChatRoom} /> */}
           <Route path="*" component={PracHome} />
         </Switch>
       )}

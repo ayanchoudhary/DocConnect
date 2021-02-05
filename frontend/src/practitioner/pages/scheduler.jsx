@@ -4,17 +4,14 @@ import Sidebar from "practitioner/components/sidebar/sidebar";
 import Header from "components/header/header";
 import Recurring from "practitioner/components/activity/recurring";
 
-const RecurringActivity = () => {
+const Scheduler = () => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Header />
-      <Sidebar
-        selected="recurring"
-        open={["activity", "create", "recurring"]}
-      />
-      <Recurring />
+      <Sidebar selected="scheduler" open={["scheduler"]} />
+      {/* <Recurring /> */}
     </Layout>
   );
 };
 
-export default RecurringActivity;
+export default Scheduler;

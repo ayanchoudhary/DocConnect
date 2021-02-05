@@ -8,7 +8,7 @@ const OneTimeActivity = () => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Header />
-      <Sidebar selected="onetime" open={["sub1", "sub1-2", "onetime"]} />
+      <Sidebar selected="onetime" open={["activity", "create", "onetime"]} />
       <OneTime />
     </Layout>
   );

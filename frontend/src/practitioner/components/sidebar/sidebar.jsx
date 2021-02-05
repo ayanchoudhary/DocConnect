@@ -20,15 +20,19 @@ const Sidebar = ({ selected, open }) => {
       defaultOpenKeys={open}
       mode="inline"
     >
-      <Menu.Item key="1" icon={<MailOutlined />}>
-        <Link to="/newClient">Profile</Link>
+      <Menu.Item key="profile" icon={<MailOutlined />}>
+        Profile
       </Menu.Item>
-      <Menu.Item key="2" icon={<CalendarOutlined />}>
-        Scheduler
+      <Menu.Item key="scheduler" icon={<CalendarOutlined />}>
+        <Link to="/scheduler">Scheduler</Link>
       </Menu.Item>
-      <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Medical Activity">
-        <Menu.Item key="3">View Registered Activities</Menu.Item>
-        <SubMenu key="sub1-2" title="Create a New Activity">
+      <SubMenu
+        key="activity"
+        icon={<AppstoreOutlined />}
+        title="Medical Activity"
+      >
+        <Menu.Item key="view">View Registered Activities</Menu.Item>
+        <SubMenu key="create" title="Create a New Activity">
           <Menu.Item key="onetime">
             <Link to="/activity/create/onetime">One-Time Activity</Link>
           </Menu.Item>
@@ -37,10 +41,20 @@ const Sidebar = ({ selected, open }) => {
           </Menu.Item>
         </SubMenu>
       </SubMenu>
-      <SubMenu key="sub2" icon={<SettingOutlined />} title="Consultations">
-        <Menu.Item key="7">On-Going Consultations</Menu.Item>
-        <Menu.Item key="8">Patient History</Menu.Item>
-        <Menu.Item key="9">New Appointments</Menu.Item>
+      <SubMenu
+        key="consultation"
+        icon={<SettingOutlined />}
+        title="Consultations"
+      >
+        <Menu.Item key="ongoing">
+          <Link to="/consultation/ongoing">On-Going Consultations</Link>
+        </Menu.Item>
+        <Menu.Item key="history">
+          <Link to="/consultation/history">Patient History</Link>
+        </Menu.Item>
+        <Menu.Item key="new">
+          <Link to="/consultation/new">New Appointments</Link>
+        </Menu.Item>
       </SubMenu>
       <Menu.Item key="chat" icon={<LinkOutlined />}>
         <Link to="/chat">Chat with a patient</Link>
