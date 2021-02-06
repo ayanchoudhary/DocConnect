@@ -64,4 +64,15 @@ router.post(
   }
 );
 
+router.get("/", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const profile = await User.findOne({ email: email })
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

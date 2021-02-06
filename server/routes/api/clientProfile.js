@@ -5,6 +5,7 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 
 const User = require("../../models/ProfileClient");
+const Prescription = require("../../models/Prescription");
 
 router.post(
   "/newClient",
@@ -55,5 +56,53 @@ router.post(
     }
   }
 );
+
+router.get("/", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const profile = await User.findOne({ email: email })
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/prescription", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const prescriptions = await Prescription.find({ email: email })
+    res.json(prescriptions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post("/prescription", async (req, res) => {
+  const resume = req.body.resume;
+  let baseImg = resume.split(',')[1]
+  let binaryData = new Buffer(baseImg, 'base64')
+  let updateData = { resume: `${req.body.title}.pdf` }
+  const url = `/uploads/prescriptions/${updateData.resume}`
+  require('fs').writeFile(`./uploads/prescriptions/${updateData.resume}`, binaryData, function(err) {
+    if (err) {
+      return res.status(400).send({ success: false, msg: 'something went wrong' })
+    } else {
+      try {
+        const newPrescription = new Prescription({
+          title: req.body.title,
+          email: req.body.email,
+          url: url
+        });
+        const prescription = await newPrescription.save();
+        res.json(prescription);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+      }
+    }
+  })
+})
 
 module.exports = router;
