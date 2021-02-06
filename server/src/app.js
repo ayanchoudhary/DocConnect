@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const http = require("http");
 const socketio = require("socket.io");
 const connectDB = require("../config/db");
@@ -13,11 +14,13 @@ const io = socketio(server, {
 
 connectDB();
 app.use(express.json({ extender: false }));
+app.use(cors());
 
 app.use("/api/profile", require("../routes/api/practionerProfile"));
 app.use("/api/profile", require("../routes/api/clientProfile"));
 app.use("/api/activity", require("../routes/api/oneTimeActivity"));
 app.use("/api/activity", require("../routes/api/recurringActivity"));
+app.use("/api/activity", require("../routes/api/activity"));
 
 const PORT = process.env.PORT || 4000;
 

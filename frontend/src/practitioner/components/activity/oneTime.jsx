@@ -13,6 +13,7 @@ import {
   Modal,
   notification,
 } from "antd";
+import { axiosInstance } from "api/axiosInstance";
 import _ from "lodash";
 import "styles/main.scss";
 
@@ -75,6 +76,21 @@ const OneTime = () => {
       });
     } else {
       //Send to API
+      axiosInstance
+        .post("/api/activity/newActivity1", fields)
+        .then(function (response) {
+          console.log(response);
+          notification.open({
+            message: "Success",
+            description: "Your activity was saved",
+            onClick: () => {
+              window.location.reload();
+            },
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 

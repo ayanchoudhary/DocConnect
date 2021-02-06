@@ -11,6 +11,7 @@ import {
   Modal,
   notification,
 } from "antd";
+import { axiosInstance } from "api/axiosInstance";
 import "styles/main.scss";
 
 const { RangePicker } = DatePicker;
@@ -89,6 +90,21 @@ const Recurring = () => {
       });
     } else {
       //Send to API
+      axiosInstance
+        .post("/api/activity/newActivity2", fields)
+        .then(function (response) {
+          console.log(response);
+          notification.open({
+            message: "Success",
+            description: "Your activity was saved",
+            onClick: () => {
+              window.location.reload();
+            },
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 
