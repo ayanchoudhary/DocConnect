@@ -1,4 +1,7 @@
 {
+  "providers": [
+    "awscloudformation"
+  ],
   "projectName": "frontend",
   "version": "3.0",
   "frontend": "javascript",
@@ -7,9 +10,8 @@
     "config": {
       "SourceDir": "src",
       "DistributionDir": "build",
-      "BuildCommand": "npm run build",
-      "StartCommand": "npm run start"
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
     }
-  },
-  "providers": ["awscloudformation"]
+  }
 }
