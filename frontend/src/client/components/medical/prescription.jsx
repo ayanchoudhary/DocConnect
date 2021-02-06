@@ -11,10 +11,10 @@ class Prescription extends Component {
     this.viewSDKClient = new ViewSDKClient();
   }
 
-  previewFile = () => {
+  previewFile = (url, filename) => {
     this.viewSDKClient.ready().then(() => {
       /* Invoke file preview */
-      this.viewSDKClient.previewFile("", {
+      this.viewSDKClient.previewFile("", url, filename, {
         /* Pass the embed mode option here */
         embedMode: "LIGHT_BOX",
       });
@@ -42,7 +42,15 @@ class Prescription extends Component {
           }}
         >
           <div id="container" className="light-box-container">
-            <button onClick={this.previewFile} className="lb-view-file-btn">
+            <button
+              onClick={() =>
+                this.previewFile(
+                  "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf",
+                  "test"
+                )
+              }
+              className="lb-view-file-btn"
+            >
               View PDF
             </button>
           </div>

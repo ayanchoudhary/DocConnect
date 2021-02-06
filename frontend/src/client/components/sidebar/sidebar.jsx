@@ -55,9 +55,6 @@ const Sidebar = ({ selected, open }) => {
       <Menu.Item key="chat" icon={<LinkOutlined />}>
         <Link to="/chat">Chat with a Practitioner</Link>
       </Menu.Item>
-      <Menu.Item key="chatAI" icon={<LinkOutlined />}>
-        <Link to="/activity/create/onetime">Consult with AI Practitioner</Link>
-      </Menu.Item>
     </Menu>
   );
 };

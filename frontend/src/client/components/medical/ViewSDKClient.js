@@ -27,10 +27,10 @@ class ViewSDKClient {
     return this.readyPromise;
   }
 
-  previewFile(divId, viewerConfig) {
+  previewFile(divId, url, fileName, viewerConfig) {
     const config = {
       /* Pass your registered client id */
-      clientId: "569d338eb67640ba92456bfa3af89f74",
+      clientId: "35a6f8573e454b05b94cfab2988c8617",
     };
     if (divId) {
       /* Optional only for Light Box embed mode */
@@ -47,7 +47,7 @@ class ViewSDKClient {
         content: {
           /* Location of file where it is hosted */
           location: {
-            url: "http://africau.edu/images/default/sample.pdf",
+            url,
             /*
                   If the file URL requires some additional headers, then it can be passed as follows:-
                   headers: [
@@ -62,7 +62,7 @@ class ViewSDKClient {
         /* Pass meta data of file */
         metaData: {
           /* file name */
-          fileName: "Bodea Brochure.pdf",
+          fileName,
           /* file ID */
           id: "6d07d124-ac85-43b3-a867-36930f502ac6",
         },
