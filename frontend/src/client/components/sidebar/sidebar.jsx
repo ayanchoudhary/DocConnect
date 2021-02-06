@@ -51,14 +51,11 @@ const Sidebar = ({ selected, open }) => {
         <Menu.Item key="prescription">
           <Link to="/medical/prescription">Upload Prescriptions</Link>
         </Menu.Item>
-        <Menu.Item key="calendar">
-          <Link to="/medical/calendar">Health Calendar</Link>
-        </Menu.Item>
       </SubMenu>
       <Menu.Item key="chat" icon={<LinkOutlined />}>
         <Link to="/chat">Chat with a Practitioner</Link>
       </Menu.Item>
-      <Menu.Item key="chat" icon={<LinkOutlined />}>
+      <Menu.Item key="chatAI" icon={<LinkOutlined />}>
         <Link to="/activity/create/onetime">Consult with AI Practitioner</Link>
       </Menu.Item>
     </Menu>

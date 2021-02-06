@@ -31,7 +31,9 @@ const Sidebar = ({ selected, open }) => {
         icon={<AppstoreOutlined />}
         title="Medical Activity"
       >
-        <Menu.Item key="view">View Registered Activities</Menu.Item>
+        <Menu.Item key="view">
+          <Link to="/activity/view">View Registered Activities</Link>
+        </Menu.Item>
         <SubMenu key="create" title="Create a New Activity">
           <Menu.Item key="onetime">
             <Link to="/activity/create/onetime">One-Time Activity</Link>

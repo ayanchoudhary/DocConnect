@@ -23,7 +23,6 @@ import RenewConsultation from "client/pages/renewConsultation";
 import OnGoingConsultation from "client/pages/onGoingConsultation";
 import PreviousConsultation from "client/pages/previousConsultation";
 import Prescription from "client/pages/prescription";
-import HealthCalendar from "client/pages/healthCalendar";
 import { SET_USER } from "constants/action-types";
 
 Amplify.configure(awsconfig);
@@ -80,7 +79,6 @@ const App = () => {
             component={PreviousConsultation}
           />
           <Route exact path="/medical/prescription" component={Prescription} />
-          <Route exact path="/medical/calendar" component={HealthCalendar} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
           <Route path="*" component={ClientHome} />

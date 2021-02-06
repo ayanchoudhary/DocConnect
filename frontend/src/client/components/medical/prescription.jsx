@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ViewSDKClient from "./ViewSDKClient";
+import { Layout } from "antd";
+import "styles/main.scss";
+
+const { Content } = Layout;
 
 class Prescription extends Component {
   constructor() {
@@ -19,11 +23,31 @@ class Prescription extends Component {
 
   render() {
     return (
-      <div id="container" className="light-box-container">
-        <button onClick={this.previewFile} className="lb-view-file-btn">
-          View PDF
-        </button>
-      </div>
+      <Layout
+        className="page"
+        style={{
+          position: "absolute",
+          top: "4rem",
+          left: 256,
+        }}
+      >
+        <Content
+          className="site-layout-background"
+          style={{
+            padding: 24,
+            margin: 24,
+            background: "#fff",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <div id="container" className="light-box-container">
+            <button onClick={this.previewFile} className="lb-view-file-btn">
+              View PDF
+            </button>
+          </div>
+        </Content>
+      </Layout>
     );
   }
 }
