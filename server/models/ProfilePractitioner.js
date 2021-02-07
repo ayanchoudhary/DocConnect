@@ -32,6 +32,15 @@ const ProfilePractitionerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  days: {
+    type: [String]
+  },
+  checkin: {
+    type: String,
+  },
+  checkout: {
+    type: String,
+  },
 });
 
 module.exports = ProfilePractitioner = mongoose.model(

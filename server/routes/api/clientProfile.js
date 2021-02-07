@@ -3,6 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
+const _ = require("lodash");
 
 const User = require("../../models/ProfileClient");
 const Prescription = require("../../models/Prescription");
@@ -70,7 +71,7 @@ router.get("/", async (req, res) => {
 
 router.get("/prescription", async (req, res) => {
   try {
-    const email = req.params.email;
+    const email = req.query.email;
     const prescriptions = await Prescription.find({ email: email })
     res.json(prescriptions);
   } catch (err) {
@@ -80,29 +81,38 @@ router.get("/prescription", async (req, res) => {
 });
 
 router.post("/prescription", async (req, res) => {
-  const resume = req.body.resume;
-  let baseImg = resume.split(',')[1]
-  let binaryData = new Buffer(baseImg, 'base64')
-  let updateData = { resume: `${req.body.title}.pdf` }
-  const url = `/uploads/prescriptions/${updateData.resume}`
-  require('fs').writeFile(`./uploads/prescriptions/${updateData.resume}`, binaryData, function(err) {
-    if (err) {
-      return res.status(400).send({ success: false, msg: 'something went wrong' })
-    } else {
-      try {
-        const newPrescription = new Prescription({
-          title: req.body.title,
-          email: req.body.email,
-          url: url
+  try {
+    if(!req.files) {
+        res.send({
+            status: false,
+            message: 'No file uploaded'
         });
-        const prescription = await newPrescription.save();
-        res.json(prescription);
-      } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server error");
-      }
+    } else {
+        //loop all files
+        _.forEach(_.keysIn(req.files.prescriptions), (key) => {
+            let photo = req.files.prescriptions[key];
+
+            //move photo to uploads directory
+            const url = './uploads/prescriptions/' + photo.name;
+            photo.mv(url);
+
+            const newPrescription = new Prescription({
+              title: photo.name,
+              email: req.body.email,
+              url: '/uploads/prescriptions/' + photo.name
+            });
+            const prescription = newPrescription.save();
+        });
+
+        //return response
+        res.send({
+            status: true,
+            message: 'Files are uploaded',
+        });
     }
-  })
+} catch (err) {
+    res.status(500).send(err);
+}
 })
 
 module.exports = router;
