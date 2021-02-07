@@ -1,5 +1,7 @@
 import React from "react";
 import { Layout, Form, Input, DatePicker, Select, Button } from "antd";
+import { useSelector } from "react-redux";
+import { axiosInstance } from "api/axiosInstance";
 import "styles/main.scss";
 
 const formItemLayout = {
@@ -36,15 +38,27 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const FindPractitioner = () => {
+  const user = useSelector((state) => state.user);
+
   const onFinish = (fieldsValue) => {
     // Should format date value before submit.
     const values = {
       ...fieldsValue,
-      time: fieldsValue["time"].format("HH:mm:ss"),
+      date: fieldsValue["date"].format("YYYY-MM-DD"),
     };
-    setFields(values);
-    console.log("Received values of form: ", values);
-    setPreview(true);
+    const data = {
+      client: user.email,
+      symptoms: fieldsValue.symptoms,
+      discomfortStart: values.date,
+    };
+    axiosInstance
+      .post("/api/consultation/newConsultation", data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

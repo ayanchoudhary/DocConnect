@@ -23,6 +23,9 @@ const ConsultationSchema = new Schema({
   discomfortStart: {
     type: String,
   },
+  remarks: {
+    type: String
+  },
   onetime: {
     type: [Schema.Types.ObjectId],
     ref: "onetimeactivity",

@@ -11,10 +11,6 @@ router.post(
   [
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please enter a valid email").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 8 or more characters"
-    ).isLength({ min: 8 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -26,7 +22,6 @@ router.post(
     const {
       name,
       email,
-      password,
       qualifications,
       prescriptioncost,
     } = req.body;
@@ -48,13 +43,10 @@ router.post(
         name,
         email,
         avatar,
-        password,
         qualifications,
         prescriptioncost,
       });
 
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
       await user.save();
       res.send("User registered");
     } catch (err) {

@@ -28,6 +28,7 @@ app.use("/api/profile", require("./routes/api/clientProfile"));
 app.use("/api/activity", require("./routes/api/oneTimeActivity"));
 app.use("/api/activity", require("./routes/api/recurringActivity"));
 app.use("/api/activity", require("./routes/api/activity"));
+app.use("/api/consultation", require("./routes/api/consultation"));
 
 app.get("/uploads/prescriptions/*", function (req, res) {
   if (req.url.indexOf('?') > 0) {

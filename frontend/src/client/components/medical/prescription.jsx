@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ViewSDKClient from "./ViewSDKClient";
-import { Layout, Form, Upload, Button, Skeleton, Card } from "antd";
-import { InboxOutlined, EditOutlined } from "@ant-design/icons";
+import { Layout, Form, Upload, Button, Card } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
 import { axiosInstance } from "api/axiosInstance";
 import FormData from "form-data";
 import "styles/main.scss";
