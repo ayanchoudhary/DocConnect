@@ -91,6 +91,7 @@ router.post("/prescription", async (req, res) => {
         //loop all files
         _.forEach(_.keysIn(req.files.prescriptions), (key) => {
             let photo = req.files.prescriptions[key];
+            if (photo.mv == undefined) photo = req.files.prescriptions;
 
             //move photo to uploads directory
             const url = './uploads/prescriptions/' + photo.name;
