@@ -1,4 +1,4 @@
-# Frontend
+# Server
 
 This is the backend portal for DocConnect. It feature an Express and NodeJS based backend with Mongo as the database.
 
