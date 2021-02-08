@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef } from "react";
 import Header from "components/header/header";
-import Sidebar from "client/components/sidebar/sidebar";
+import Sidebar from "practitioner/components/sidebar/sidebar";
 import { Layout } from "antd";
-import "styles/main.scss";
 import "./chatRoom.css";
+import "styles/main.scss";
 import useChat from "./useChat";
 import sendIcon from "./send.svg";
 

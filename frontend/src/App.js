@@ -3,12 +3,14 @@ import "antd/dist/antd.css";
 import Amplify from "@aws-amplify/core";
 import { Auth } from "@aws-amplify/auth";
 import awsconfig from "./aws-exports";
-import { withAuthenticator } from "aws-amplify-react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "pages/chat/chat";
+import ChatPrac from "pages/chat/chatPrac";
 import ChatRoom from "pages/chat/chatRoom";
+import ChatRoomPrac from "pages/chat/chatRoomPrac";
 import PracProfile from "practitioner/pages/profile";
 import Scheduler from "practitioner/pages/scheduler";
 import ViewActivity from "practitioner/pages/viewActivity";
@@ -71,7 +73,7 @@ const App = () => {
             component={PreviousConsultation}
           />
           <Route exact path="/medical/prescription" component={Prescription} />
-          <Route exact path="/chat" render={(props) => <Chat {...props} />} />
+          <Route exact path="/chat" component={Chat} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
           <Route path="*" component={Profile} />
         </Switch>
@@ -101,8 +103,8 @@ const App = () => {
             component={PreviousHistory}
           />
           <Route exact path="/consultation/new" component={NewConsultation} />
-          {/* <Route exact path="/chat" render={(props) => <Chat {...props} />} />
-          <Route exact path="/chat/:roomId" component={ChatRoom} /> */}
+          <Route exact path="/chat" component={ChatPrac} />
+          <Route exact path="/chat/:roomId" component={ChatRoomPrac} />
           <Route path="*" component={PracProfile} />
         </Switch>
       )}
