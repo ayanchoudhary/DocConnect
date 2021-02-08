@@ -17,4 +17,28 @@ router.get("/", async (_req, res) => {
   }
 });
 
+router.post("/appointment", async (req, res) => {
+  try {
+    const onetime = req.body.onetime;
+    const recurring = req.body.recurring;
+    let oneTimeActivities = [];
+    let recurringActivities = [];
+    for (let i=0; i < onetime.length; i++) {
+      const result = await OneTimeActivity.findById({ _id: onetime[i] });
+      oneTimeActivities.push(result);
+    }
+    for (let i=0; i < recurring.length; i++) {
+      const result = await RecurringActivity.findById({ _id: recurring[i] });
+      recurringActivities.push(result);
+    }
+    res.json({
+      "oneTimeActivities": oneTimeActivities,
+      "recurringActivities": recurringActivities
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;

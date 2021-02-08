@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Consultation = require("../../models/Consultation");
 const Practitioner = require("../../models/ProfilePractitioner");
+const OneTime = require("../../models/OneTimeActivity");
+const Recurring = require("../../models/RecurringActivity");
 
 router.get("/client/ongoing", async (req, res) => {
   try {
@@ -52,6 +54,7 @@ router.post("/renewConsultation", async (req, res) => {
       remarks: req.body.remarks,
     });
     const consultation = await newConsultation.save();
+    await Consultation.findByIdAndDelete({ _id: req.body.id });
     res.json(consultation);
   } catch (err) {
     console.error(err.message);

@@ -1,5 +1,7 @@
 import React from "react";
 import { Layout, Form, TimePicker, Button, Checkbox, Col, Row } from "antd";
+import { axiosInstance } from "api/axiosInstance";
+import { useSelector } from "react-redux";
 import "styles/main.scss";
 
 const formItemLayout = {
@@ -34,20 +36,29 @@ const config = {
 const { Content } = Layout;
 
 const Scheduler = () => {
+  const user = useSelector((state) => state.user);
+
   const onFinish = (fieldsValue) => {
     // Should format date value before submit.
-    const rangeValue = fieldsValue["range-picker"];
     const values = {
       ...fieldsValue,
-      dates: [
-        rangeValue[0].format("DD-MM-YYYY"),
-        rangeValue[1].format("DD-MM-YYYY"),
-      ],
-      time: fieldsValue["time-picker"].format("HH:mm:ss"),
+      timeIn: fieldsValue["timeIn"].format("HH:mm:ss"),
+      timeOut: fieldsValue["timeOut"].format("HH:mm:ss"),
     };
-    setFields(values);
     console.log("Received values of form: ", values);
-    setPreview(true);
+    axiosInstance
+      .put("/api/profile/schedule", {
+        email: user.email,
+        days: fieldsValue.days,
+        checkin: fieldsValue.timeIn,
+        checkout: fieldsValue.timeOut,
+      })
+      .then(function (response) {
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

@@ -11,7 +11,7 @@ const Appointment = () => {
   const user = useSelector((state) => state.user);
   const [consultations, setConsultations] = useState([]);
 
-  useEffect(() => {
+  const getAppointments = (user) => {
     axiosInstance
       .get("/api/consultation/practitioner/new", {
         params: { practitioner: user.email },
@@ -22,6 +22,36 @@ const Appointment = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const acceptAppointment = (id) => {
+    axiosInstance
+      .put("/api/consultation/accept", {
+        id,
+      })
+      .then(function (response) {
+        getAppointments(user);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const rejectAppointment = (id) => {
+    axiosInstance
+      .delete("/api/consultation/reject", {
+        id,
+      })
+      .then(function (response) {
+        getAppointments(user);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getAppointments(user);
   }, [user]);
 
   return (
@@ -41,6 +71,7 @@ const Appointment = () => {
           background: "#fff",
           height: "100%",
           width: "100%",
+          overflowY: "scroll",
         }}
       >
         {consultations.length != 0 ? (
@@ -48,7 +79,20 @@ const Appointment = () => {
             <Card
               key={consultation._id}
               style={{ marginTop: 16 }}
-              actions={[<p key="accept">Accept</p>, <p key="reject">Reject</p>]}
+              actions={[
+                <p
+                  key="accept"
+                  onClick={() => acceptAppointment(consultation._id)}
+                >
+                  Accept
+                </p>,
+                <p
+                  key="reject"
+                  onClick={() => rejectAppointment(consultation._id)}
+                >
+                  Reject
+                </p>,
+              ]}
             >
               <Skeleton loading={false} avatar active>
                 <Meta

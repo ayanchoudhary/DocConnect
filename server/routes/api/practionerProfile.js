@@ -56,6 +56,23 @@ router.post(
   }
 );
 
+router.put("/schedule", async (req, res) => {
+  try {
+    const email = req.body.email;
+    const profile = await User.findOneAndUpdate(
+      { email: email },
+      {
+        days: req.body.days,
+        checkin: req.body.checkin,
+        checkout: req.body.checkout,
+      })
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 router.get("/", async (req, res) => {
   try {
     const email = req.params.email;
