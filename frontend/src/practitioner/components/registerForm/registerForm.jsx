@@ -1,93 +1,130 @@
-import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import React from "react";
+import { Layout, Form, Input, Button, Select } from "antd";
+import "styles/main.scss";
 
-import Header from "../../../components/header/header";
-import Sidebar from "../sidebar/sidebar";
+const { Content } = Layout;
+const { Option } = Select;
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 16,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+};
 
 const RegisterFormPractitioner = () => {
-  const [form] = Form.useForm();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    qualifications: "",
-    prescriptioncost: 0,
-  });
-
-  const { name, email, password, qualifications, prescriptioncost } = formData;
-
-  const onChange = (event) =>
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setFormData({});
-    console.log(formData);
+  const onFinish = (values) => {
+    console.log("Success:", values);
+    axiosInstance
+      .post("/api/profile/newPractitioner", values)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
+
   return (
-    <div className="container section">
-      <Header />
-      <Form form={form} layout="vertical" className="form">
-        <Form.Item label="Name" required tooltip="This is a required field">
-          <Input
-            placeholder="Enter your Name"
-            value={name}
+    <Layout
+      className="page"
+      style={{
+        position: "absolute",
+        top: "4rem",
+        left: 256,
+      }}
+    >
+      <Content
+        className="site-layout-background"
+        style={{
+          padding: 24,
+          margin: 24,
+          background: "#fff",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <Form
+          name="basic"
+          style={{ marginTop: "5vh" }}
+          {...formItemLayout}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            label="Name"
             name="name"
-            onChange={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item label="Email" required tooltip="This is a required question">
-          <Input
-            placeholder="Enter your Email"
+            rules={[{ required: true, message: "Please input your name!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Email"
             name="email"
-            value={email}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          required
-          tooltip="This is a required question"
-        >
-          <Input.Password
-            placeholder="Enter your Password"
-            name="password"
-            value={password}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Qualifications"
-          required
-          tooltip="This is a required question"
-        >
-          <Input
-            placeholder="Enter your qualifications"
+            rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Qualifications"
             name="qualifications"
-            value={qualifications}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Prescription Cost"
-          required
-          tooltip="This is a required question"
-        >
-          <Input
-            type="number"
-            placeholder="Enter your Prescription Cost"
+            rules={[
+              { required: true, message: "Please input your qualifications!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Prescription Cost"
             name="prescriptioncost"
-            value={prescriptioncost}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" onClick={(e) => onSubmit(e)}>
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-      <Sidebar />
-    </div>
+            rules={[
+              {
+                required: true,
+                message: "Please input your prescription costs!",
+              },
+            ]}
+          >
+            <span>
+              <Input type="text" style={{ width: 100 }} />
+              <Select value="inr" style={{ width: 80, margin: "0 8px" }}>
+                <Option value="inr">INR</Option>
+              </Select>
+            </span>
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              xs: {
+                span: 24,
+                offset: 0,
+              },
+              sm: {
+                span: 16,
+                offset: 8,
+              },
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Content>
+    </Layout>
   );
 };
 

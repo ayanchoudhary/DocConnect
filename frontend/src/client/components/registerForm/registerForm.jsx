@@ -1,67 +1,101 @@
-import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import React from "react";
+import { Layout, Form, Input, Button } from "antd";
+import "styles/main.scss";
 
-import Header from "../../../components/header/header";
-import Sidebar from "../sidebar/sidebar";
-import "./registerForm.css";
+const { Content } = Layout;
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 16,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+};
 
 const RegisterFormClient = () => {
-  const [form] = Form.useForm();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { name, email, password } = formData;
-
-  const onChange = (event) =>
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setFormData({});
-    console.log(formData);
+  const onFinish = (values) => {
+    console.log("Success:", values);
+    axiosInstance
+      .post("/api/profile/newClient", values)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
+
   return (
-    <div className="container">
-      <Header />
-      <Form form={form} layout="vertical" className="form">
-        <Form.Item label="Name" required tooltip="This is a required field">
-          <Input
-            placeholder="Enter your Name"
-            value={name}
-            name="name"
-            onChange={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item label="Email" required tooltip="This is a required question">
-          <Input
-            placeholder="Enter your Email"
-            name="email"
-            value={email}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          required
-          tooltip="This is a required question"
+    <Layout
+      className="page"
+      style={{
+        position: "absolute",
+        top: "4rem",
+        left: 256,
+      }}
+    >
+      <Content
+        className="site-layout-background"
+        style={{
+          padding: 24,
+          margin: 24,
+          background: "#fff",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <Form
+          name="basic"
+          style={{ marginTop: "5vh" }}
+          {...formItemLayout}
+          onFinish={onFinish}
         >
-          <Input.Password
-            placeholder="Enter your Password"
-            name="password"
-            value={password}
-            onChangeCapture={(e) => onChange(e)}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" onClick={(e) => onSubmit(e)}>
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-      <Sidebar />
-    </div>
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: "Please input your name!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              xs: {
+                span: 24,
+                offset: 0,
+              },
+              sm: {
+                span: 16,
+                offset: 8,
+              },
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Content>
+    </Layout>
   );
 };
 

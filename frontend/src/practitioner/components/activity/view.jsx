@@ -41,7 +41,7 @@ const ViewActivity = () => {
           background: "#fff",
           height: "100%",
           width: "100%",
-          overflowY: "scroll",
+          overflowY: "auto",
         }}
       >
         <h1 style={{ marginTop: "2rem" }}>One-Time Activities</h1>

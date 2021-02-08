@@ -85,7 +85,7 @@ class Prescription extends Component {
             background: "#fff",
             height: "100%",
             width: "100%",
-            overflowY: "scroll",
+            overflowY: "auto",
           }}
         >
           <Form name="validate_other" onFinish={this.onFinish}>

@@ -21,7 +21,7 @@ const Sidebar = ({ selected, open }) => {
       mode="inline"
     >
       <Menu.Item key="profile" icon={<MailOutlined />}>
-        Profile
+        <Link to="/">Profile</Link>
       </Menu.Item>
       <Menu.Item key="scheduler" icon={<CalendarOutlined />}>
         <Link to="/scheduler">Scheduler</Link>

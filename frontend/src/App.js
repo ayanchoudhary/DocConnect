@@ -7,10 +7,9 @@ import { withAuthenticator } from "aws-amplify-react";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { useSelector, useDispatch } from "react-redux";
-import ClientHome from "client/pages/home";
-import PracHome from "practitioner/pages/home";
 import Chat from "pages/chat/chat";
 import ChatRoom from "pages/chat/chatRoom";
+import PracProfile from "practitioner/pages/profile";
 import Scheduler from "practitioner/pages/scheduler";
 import ViewActivity from "practitioner/pages/viewActivity";
 import OneTimeActivity from "practitioner/pages/oneTimeActivity";
@@ -18,6 +17,7 @@ import RecurringActivity from "practitioner/pages/recurringActivity";
 import PracConsultation from "practitioner/pages/onGoingConsultation";
 import PreviousHistory from "practitioner/pages/previousHistory";
 import NewConsultation from "practitioner/pages/newConsultation";
+import Profile from "client/pages/profile";
 import FindPractitioner from "client/pages/findPractitioner";
 import RenewConsultation from "client/pages/renewConsultation";
 import OnGoingConsultation from "client/pages/onGoingConsultation";
@@ -26,9 +26,6 @@ import Prescription from "client/pages/prescription";
 import { SET_USER } from "constants/action-types";
 
 Amplify.configure(awsconfig);
-import RegisterFormClient from "client/components/registerForm/registerForm";
-import RegisterFormPractitioner from "practitioner/components/registerForm/registerForm";
-
 const history = createBrowserHistory();
 
 const App = () => {
@@ -56,12 +53,7 @@ const App = () => {
     <Router history={history}>
       {user.client ? (
         <Switch>
-          <Route
-            exact
-            path="/newPractitioner"
-            component={RegisterFormPractitioner}
-          />
-          <Route exact path="/" render={(props) => <ClientHome {...props} />} />
+          <Route exact path="/" component={Profile} />
           <Route exact path="/appointment/find" component={FindPractitioner} />
           <Route
             exact
@@ -81,11 +73,11 @@ const App = () => {
           <Route exact path="/medical/prescription" component={Prescription} />
           <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} />
-          <Route path="*" component={ClientHome} />
+          <Route path="*" component={Profile} />
         </Switch>
       ) : (
         <Switch>
-          <Route exact path="/" render={(props) => <PracHome {...props} />} />
+          <Route exact path="/" component={PracProfile} />
           <Route exact path="/scheduler" component={Scheduler} />
           <Route exact path="/activity/view" component={ViewActivity} />
           <Route
@@ -111,7 +103,7 @@ const App = () => {
           <Route exact path="/consultation/new" component={NewConsultation} />
           {/* <Route exact path="/chat" render={(props) => <Chat {...props} />} />
           <Route exact path="/chat/:roomId" component={ChatRoom} /> */}
-          <Route path="*" component={PracHome} />
+          <Route path="*" component={PracProfile} />
         </Switch>
       )}
     </Router>
